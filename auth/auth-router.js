@@ -1,8 +1,8 @@
 const router = require('express').Router(); 
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const secret = require('../config/secrets.js');
 
+const secret = require('../config/secrets.js');
 const Users = require('../users/users-model.js');
 
 
@@ -36,7 +36,8 @@ router.post('/login', (req, res) => {
             const token = generateToken(user); 
             res.status(200)
             .json({
-                message: `Welcome ${user.username}!`
+                message: `Welcome ${user.username}!`, 
+                token
             });
         } else {
             res.status(401)
@@ -58,7 +59,7 @@ function generateToken(user) {
     }; 
     const options = {
         expiresIn: '1d'
-    }
+    };
     return jwt.sign(payload, secret.jwtSecret, options);
 }; 
 

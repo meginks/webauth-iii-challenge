@@ -10,7 +10,7 @@ module.exports = (req, res, next) => {
         res.status(401)
         .json({message: 'we do not like your token' })
       } else {
-        req.decodedJWT = decodedToken 
+        req.decodedJwt = decodedToken 
         console.log('decoded token', req.decodedJwt);
         next();
       }
